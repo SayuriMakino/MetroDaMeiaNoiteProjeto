@@ -1,5 +1,6 @@
-## Aula 08 -- 07/10 
+# Metrô da Meia-Noite
 
-O que fiz: a estação de metrô vista de cima com tileset 48x48, paredes com colisão e a personagem andando nas 4 direções.
-O que travou: (escreva o que deu problema de verdade)
-Como resolvi: (como você resolveu)
+Aluna: Sayuri Makino Mendes
+Tema: Estação de metrô à meia-noite com passageiros fantasmas
+Tipo: Fuga — sobreviver até a saída abrir, e alcançá-la
+Modo: Horda
