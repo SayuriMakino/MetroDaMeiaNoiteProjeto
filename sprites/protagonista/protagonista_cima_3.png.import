@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj4p0ydgnhmkt"
-path="res://.godot/imported/captura.png-a6ba5d58b6c5bcd2de5dd3ec4463247d.ctex"
+uid="uid://x3wg0gutl5v4"
+path="res://.godot/imported/protagonista_cima_3.png-bedffb127757cbba4cfdac062d66047b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/captura.png"
-dest_files=["res://.godot/imported/captura.png-a6ba5d58b6c5bcd2de5dd3ec4463247d.ctex"]
+source_file="res://sprites/protagonista/protagonista_cima_3.png"
+dest_files=["res://.godot/imported/protagonista_cima_3.png-bedffb127757cbba4cfdac062d66047b.ctex"]
 
 [params]
 
