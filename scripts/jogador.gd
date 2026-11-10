@@ -8,15 +8,21 @@ extends CharacterBody2D
 ## Última direção em que o jogador andou (vai servir para o ataque).
 var direcao_olhar := Vector2.DOWN
 var invencivel := false
+var pode_atacar := true
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurtbox: Area2D = $Hurtbox
+@onready var ataque: Area2D = $Ataque
+@onready var golpe: ColorRect = $Ataque/Golpe
 
 
 func _process(_delta: float) -> void:
 	# Tem inimigo encostando em mim?
 	if not invencivel and hurtbox.has_overlapping_bodies():
 		levar_dano()
+
+	if pode_atacar and Input.is_action_just_pressed("atacar"):
+		atacar()
 
 
 func _physics_process(_delta: float) -> void:
@@ -55,3 +61,17 @@ func levar_dano() -> void:
 	await get_tree().create_timer(1.0).timeout
 	modulate.a = 1.0
 	invencivel = false
+
+
+func atacar() -> void:
+	# Acerta todo fantasma que estiver dentro do círculo neste quadro.
+	for inimigo in ataque.get_overlapping_bodies():
+		inimigo.levar_golpe()
+
+	# O clarão dura 0,1 s; o próximo golpe só sai 0,4 s depois deste.
+	pode_atacar = false
+	golpe.visible = true
+	await get_tree().create_timer(0.1).timeout
+	golpe.visible = false
+	await get_tree().create_timer(0.3).timeout
+	pode_atacar = true
