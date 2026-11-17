@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" path="res://entities/jogador.tscn" id="2_j5742"]
 [ext_resource type="Script" path="res://scripts/principal.gd" id="3_prin"]
 [ext_resource type="PackedScene" path="res://entities/inimigo.tscn" id="4_ini"]
-[ext_resource type="Texture2D" path="res://sprites/metro_tileset_48px.png" id="5_tex"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nav"]
 vertices = PackedVector2Array(437, 304, 907, 256, 1088, 256, 876, 344, 804, 344, 707, 342, 876, 400, 1088, 496, 773, 448, 804, 400, 715, 448, 489, 448, 588, 400, 589, 400, 516, 400, 489, 400, 516, 344, 773, 400, 707, 400, 715, 400, 423, 400, 419, 400, 419, 342, 589, 342, 764, 208, 437, 256, 571, 208, 201, 208, 201, 160, 233, 160, 233, 208, 228, 344, 295, 208, 295, 160, 463, 160, 463, 208, 379, 256, 545, 208, 545, 160, 571, 160, 764, 160, 1088, 160, 907, 204, 1088, 204, 1136, 496, 1136, 512, 16, 512, 423, 448, 64, 496, 16, 496, 300, 400, 301, 400, 228, 400, 64, 160, 79, 160, 79, 208, 300, 344, 301, 342, 379, 304, 588, 344)
@@ -12,12 +11,8 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 1152, 0, 1152, 624, 0, 624)])
 agent_radius = 16.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_porta"]
-atlas = ExtResource("5_tex")
-region = Rect2(6, 634, 88, 132)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_saida"]
-radius = 20.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_saida"]
+size = Vector2(96, 40)
 
 [node name="Principal" type="Node2D"]
 script = ExtResource("3_prin")
@@ -47,18 +42,26 @@ position = Vector2(504, 312)
 
 [node name="Saida" type="Area2D" parent="Navegacao/Mundo"]
 visible = false
-position = Vector2(72, 176)
+position = Vector2(1008, 164)
 collision_layer = 0
 collision_mask = 2
 monitoring = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Navegacao/Mundo/Saida"]
-position = Vector2(0, -16)
-scale = Vector2(0.5, 0.5)
-texture = SubResource("AtlasTexture_porta")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Navegacao/Mundo/Saida"]
-shape = SubResource("CircleShape2D_saida")
+shape = SubResource("RectangleShape2D_saida")
+
+[node name="Aviso" type="Label" parent="Navegacao/Mundo/Saida"]
+z_index = 10
+offset_left = -40.0
+offset_top = -72.0
+offset_right = 40.0
+offset_bottom = -44.0
+theme_override_colors/font_color = Color(0.4, 1, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "↑ SAÍDA"
+horizontal_alignment = 1
 
 [node name="Nascedouros" type="Node2D" parent="."]
 

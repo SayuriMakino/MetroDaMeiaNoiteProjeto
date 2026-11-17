@@ -36,14 +36,16 @@ O que fiz:
 - O fantasma ganhou um NavigationAgent2D (Path e Target Desired Distance em 4). Agora ele calcula a rota e dá a volta nos objetos, em vez de empurrar a parede.
 - Ataque: ação `atacar` no Espaço, uma Area2D `Ataque` em volta da protagonista (Mask só na camada 3) e um clarão branco (`Golpe`) que aparece por 0,1 s. Entre um golpe e outro há 0,4 s de recarga.
 - O fantasma tem vida 1 e some ao levar o golpe; a estação conta os abates e o HUD mostra "Vida" e "Abates".
-- Objetivo do meu tipo (Fuga): quando o relógio de 60 s acaba, a porta de saída aparece no canto de cima, à esquerda, e o HUD avisa "A saída abriu!". Encostando nela, vence.
+- Objetivo do meu tipo (Fuga): quando o relógio de 60 s acaba, a escada rolante, no canto de cima, à direita, vira a saída e o HUD avisa "A saída abriu!". Encostando nela, vence.
 
 O que travou:
 - A camada Objetos precisava ficar dentro do Mundo por causa do y-sort (a protagonista passar atrás/na frente dos objetos), mas a Navegacao só enxerga a colisão do que está dentro dela.
 - Os meus personagens e tiles são de 48 px, bem maiores que os do exemplo da aula, então os valores da folha ficavam pequenos.
+- Depois dos 60 s parecia que a saída não abria. Ela abria, mas a porta estava no canto de cima, à esquerda, bem em cima de uma porta do cenário com a mesma arte, então a tela não mudava. Além disso, a placa "Saída" do cenário aponta para a escada rolante, do outro lado.
 
 Como resolvi:
 - Coloquei o Mundo inteiro dentro da Navegacao, junto com o Chao e os Detalhes. O y-sort continua funcionando e a navegação enxerga os objetos.
 - Aumentei o Agent Radius para 16 (a colisão do fantasma é um quadrado de 24 px) e o raio do ataque para 40, com o clarão de 80 x 80.
 - Com o fantasma desviando dos obstáculos, não dava para aguentar os 60 s: a horda soltava uns 87 fantasmas. Deixei a horda mais leve: começa com 1 fantasma a cada 3 s (antes 2 s), acelera 3% por fantasma (antes 5%) e para em 1 a cada 1,5 s (antes 0,5 s). São uns 30 fantasmas na partida. Também deixei os fantasmas mais lentos: velocidade de 100 para 70.
 - Ainda aparecia fantasma demais. Diminuí de novo: o primeiro sai depois de 4 s, a horda acelera só 2% por fantasma e para em 1 a cada 2,5 s. Também coloquei um limite (`max_fantasmas`, 6): com 6 fantasmas na estação, só nasce outro quando algum for derrotado.
+- Tirei a porta: agora a saída é a própria escada rolante, para onde a placa "Saída" aponta. A área da `Saida` fica no pé da escada (posição 1008, 164, um retângulo de 96 x 40). Quando abre, o texto "↑ SAÍDA" pisca em verde em cima da escada.

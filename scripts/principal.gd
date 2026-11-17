@@ -46,6 +46,10 @@ func _on_horda_timeout() -> void:
 func _on_relogio_timeout() -> void:
 	saida.visible = true
 	saida.monitoring = true
+	# A saída é a escada rolante: o aviso "SAÍDA" pisca em cima dela para o jogador perceber que abriu.
+	var brilho := create_tween().set_loops()
+	brilho.tween_property(saida, "modulate", Color(0.5, 1.8, 0.5), 0.4)
+	brilho.tween_property(saida, "modulate", Color.WHITE, 0.4)
 
 
 func _on_saida_body_entered(_body: Node2D) -> void:
